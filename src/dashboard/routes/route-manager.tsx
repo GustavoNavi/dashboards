@@ -1,7 +1,10 @@
 import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom';
 import Dashboard from '../pages/dashboardPage';
 
-function DashboardPage() {
+/**
+ * @description Dashboard Page Route
+ */
+function DashboardPageRoute() {
  return (
   <BrowserRouter>
    <Switch>
@@ -12,4 +15,4 @@ function DashboardPage() {
  );
 };
 
-export default DashboardPage;
+export default DashboardPageRoute;

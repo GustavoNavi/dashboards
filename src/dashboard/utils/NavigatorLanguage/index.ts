@@ -7,7 +7,7 @@ export function getNavigatorLanguage() {
 }
 
 /**
- * Gets a item from LocalStorage.
+ * @description Gets a item from LocalStorage.
  * @param {string} item item name.
  * @returns local storage param item.
  */
@@ -16,8 +16,7 @@ export function getLocalStorageItem(item: string) {
 }
 
 /**
- * Sets item to LocalStorage.
- *
+ * @description Sets item to LocalStorage.
  * @param {key} key item name.
  * @param {value} value item value.
  * @param {doReload} doReload reload page condition.

@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export interface IsStyContainer {
   readonly disable: boolean;
-  readonly fitText: boolean;
   readonly height?: number;
   readonly size?: number;
   readonly width?: string;

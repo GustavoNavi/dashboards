@@ -1,8 +1,7 @@
 import React, { ButtonHTMLAttributes } from 'react';
 import { Sizes } from '../../../ts/enum/componentSize';
 import DashboardText from '../../DashboardText';
-
-import { StyContainer, StyLoadWrapper } from './styles';
+import { StyContainer } from './styles';
 
 export interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 
@@ -43,6 +42,22 @@ const getWidth = (size: keyof typeof Sizes): number =>
  xl: 130,
 }[size]);
 
+/**
+ * @description Fill Button Component
+ * @param {string} id Id Component
+ * @param {Function} action Action that the button is realize
+ * @param {'button' | 'submit' | 'reset'} type primitive html buttons "button" | "submit" | "reset"
+ * @param {Sizes} height Height of button
+ * @param {Sizes} size Alternative way to define the size of button
+ * @param {string} width Width of button
+ * @param {string} title Title that will appear in the button's span
+ * @param {JSX.Element} icon Icon yo show.
+ * @param {boolean} disable Disabled button or not
+ * @param {boolean} loading Component loading
+ * @param {boolean} hasFontWeight Define if has font weight 600
+ * @param {Sizes} sizeValue Define size of button's label 
+ * @param {string} borderRadius Add a border radios on the button
+ */
 export const DashboardFillButton: React.FC<Props> = ({
  id,
  action = () => { },

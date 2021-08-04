@@ -3,6 +3,9 @@ import { getNavigatorLanguage } from '../utils/NavigatorLanguage';
 
 const currentLanguage: string = getNavigatorLanguage();
 
+/**
+ * @description Language Context.
+ */
 export const LanguageContext: React.Context<{}> = React.createContext({});
 const LanguageProvider: React.FC = ({ children }) => {
  const [language, setLanguage] = useState<string>(currentLanguage);

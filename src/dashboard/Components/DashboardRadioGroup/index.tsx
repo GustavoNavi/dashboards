@@ -28,6 +28,18 @@ interface IOptions {
  label: JSX.Element | string;
 }
 
+/**
+ * @description DashboardRadioGroup Component.
+ * @param id Id Component
+ * @param name Componente Name
+ * @param options Options of component
+ * @param onChange Action on change
+ * @param label label about the radio
+ * @param disable disable radio
+ * @param initialState initial state position
+ * @param hasMarginLeft has margin left
+ * @param icon icon beside the text
+ */
 export const DashboardRadioGroup: React.FC<Props> = ({
  id,
  name,

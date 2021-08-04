@@ -16,6 +16,7 @@ interface IProps {
 
 /**
  * @description Dasboard Header Component.
+ * @param {Function} onChange Action on change.
  */
 const DashboardHeader: React.FC<IProps> = ({
  onChange = () => null

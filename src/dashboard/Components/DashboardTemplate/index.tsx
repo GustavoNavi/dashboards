@@ -9,9 +9,7 @@ import DashboardFooter from '../DashboardFooter';
 export interface IProps {
  id: string;
  children?: React.ReactNode;
- idiomOptions?: any;
  onChange?: Function;
- currentIdiom?: string;
 }
 
 /**

@@ -1,48 +1,5 @@
 import styled, { css } from 'styled-components';
 
-export const StyRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-
-  a {
-    text-decoration: none;
-
-    div {
-      width: auto;
-
-      button {
-        padding: 5px;
-      }
-    }
-  }
-`;
-
-export const StySearchAndFilterWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  & > button {
-    margin-left: 20px;
-  }
-`;
-
-export const StyHierarchyWrapper = styled.div`
-  display: flex;
-  flex-direction: row-reverse;
-
-  & > div:first-of-type {
-    position: absolute;
-    align-self: flex-end;
-
-    & > svg {
-      display: inline-flex;
-      margin-right: 135px;
-    }
-  }
-`;
-
 interface IStyWrapperBar {
   readonly width: string;
   readonly height: string;

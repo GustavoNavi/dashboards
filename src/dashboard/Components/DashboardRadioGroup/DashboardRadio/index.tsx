@@ -38,9 +38,11 @@ const getSize = (size: keyof typeof Sizes): number =>
  * @param {string} id component id.
  * @param {Function} onChange method used to trigger actions on component change.
  * @param {boolean} disable disable component
- * @param {object} theme text size.
  * @param {boolean} checked text size.
  * @param {boolean} hasMarginLeft if has margin left.
+ * @param {string} labelColor label Color.
+ * @param {string} fill fill color.
+ * @param {string} outsideCircleColor outside Circle Color.
  */
 const DashboardRadio: React.FC<IProps> = ({
  label,
@@ -57,6 +59,7 @@ const DashboardRadio: React.FC<IProps> = ({
  outsideCircleColor = 'rgba(255,255,255, 0.1)',
 }) => {
  const [focus, setFocus] = useState<boolean>(false);
+
  return (
   <StyContainer
    hasMarginLeft={hasMarginLeft}
@@ -77,7 +80,7 @@ const DashboardRadio: React.FC<IProps> = ({
        fill={fill}
        height={getSize(size)}
        width={getSize(size)}
-       middleCircleColor="gray"
+       middleCircleColor="rgba(66,65,65)"
        outsideCircleColor={outsideCircleColor}
       />
      </div>

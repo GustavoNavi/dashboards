@@ -6,6 +6,10 @@ interface IProps {
  match: any;
  location: any;
 }
+
+/**
+ * @description Dashboard Page
+ */
 export const DashboardPage: React.FC<IProps> = () => {
  return (
   <Switch>

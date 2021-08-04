@@ -1,6 +1,5 @@
 import React, { ButtonHTMLAttributes } from 'react';
 import { Sizes } from '../../../ts/enum/componentSize';
-
 import { StyContainer } from './styles';
 
 export interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -39,6 +38,19 @@ const getHeight = (size: keyof typeof Sizes): number =>
  xl: 60,
 }[size]);
 
+/**
+ * @description Circle Button Component
+ * @param {string} id Id Component
+ * @param {Function} action Action that the button is realize
+ * @param {'button' | 'submit' | 'reset'} type primitive html buttons "button" | "submit" | "reset"
+ * @param {Sizes} height Height of button
+ * @param {Sizes} size Alternative way to define the size of button
+ * @param {string} width Width of button
+ * @param {JSX.Element} icon Icon yo show.
+ * @param {boolean} disable Disabled button or not
+ * @param {boolean} background Define transparence of button
+ * @param {selected} selected Define if is selected.
+ */
 export const DashboardCircleButton: React.FC<Props> = ({
  id,
  action = () => { },

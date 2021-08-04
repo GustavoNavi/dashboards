@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { DashboardSpacing } from '../../../ts/enum/DashboardSpacing';
 interface IStyContainerProps {
- readonly show: boolean;
+  readonly show: boolean;
 }
 export const StyContainer = styled.div<IStyContainerProps>`
   width: 100%;
@@ -9,8 +9,8 @@ export const StyContainer = styled.div<IStyContainerProps>`
   position: absolute;
   z-index: 500;
   ${(props) =>
-  props.show &&
-  css`
+    props.show &&
+    css`
       opacity: 1;
       animation: fade 1s;
     `}
@@ -36,6 +36,7 @@ export const StyDialogWrapper = styled.div`
   align-items: center;
   padding: ${DashboardSpacing.base20} 0px;
 `;
+
 export const StyModal = styled.div`
   width: 100%;
   height: 100%;
@@ -53,6 +54,7 @@ export const StyHeader = styled.div`
   width: 100%;
   margin-top: ${DashboardSpacing.base20};
 `;
+
 export const StyName = styled.div`
   width: 550px;
   display: flex;
@@ -65,6 +67,7 @@ export const StyName = styled.div`
     margin-left: 50px;
   }
 `;
+
 export const StyLine = styled.hr`
   margin-bottom: ${DashboardSpacing.base20};
   width: 91%;
@@ -88,6 +91,7 @@ export const StyContent = styled.div`
     background-color: rgba(36,35,35,0.2);
   }
 `;
+
 export const StyCloseWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -96,7 +100,6 @@ export const StyCloseWrapper = styled.div`
   position: absolute;
   height: 20px;
 `;
-
 
 export const StyFormGroupInfo = styled.div`
   display: flex;
@@ -108,11 +111,6 @@ export const StyFormGroupInfo = styled.div`
    flex: none;
    margin-left: 50px;
   }
-`;
-
-export const StyInfoStatus = styled.div`
-  display: flex;
-  flex-direction: column;
 `;
 
 export const StyJustifyText = styled.div`

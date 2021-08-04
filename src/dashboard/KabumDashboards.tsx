@@ -1,5 +1,5 @@
 import React from 'react';
-import DashboardPage from './routes/route-manager';
+import DashboardPageRoute from './routes/route-manager';
 import LanguageProvider from './store/language';
 import { StyContainer } from './styles';
 
@@ -12,7 +12,7 @@ const KabumDashboards: React.FC<{}> = ({ }) => {
         <>
             <StyContainer>
                 <LanguageProvider>
-                    <DashboardPage />
+                    <DashboardPageRoute />
                 </LanguageProvider>
             </StyContainer>
         </>

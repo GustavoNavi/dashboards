@@ -15,7 +15,6 @@ export interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
  icon?: React.ReactNode;
  disable?: boolean;
  loading?: boolean;
- fitText?: boolean;
  hasFontWeight?: boolean;
  sizeValue?: Sizes;
 }
@@ -42,6 +41,21 @@ const getWidth = (size: keyof typeof Sizes): number =>
  xl: 130,
 }[size]);
 
+/**
+ * @description Underline Button Component
+ * @param {string} id Id Component
+ * @param {Function} action Action that the button is realize
+ * @param {'button' | 'submit' | 'reset'} type primitive html buttons "button" | "submit" | "reset"
+ * @param {Sizes} height Height of button
+ * @param {Sizes} size Alternative way to define the size of button
+ * @param {string} width Width of button
+ * @param {string} title Title that will appear in the button's span
+ * @param {JSX.Element} icon Icon yo show.
+ * @param {boolean} disable Disabled button or not
+ * @param {boolean} loading Component loading
+ * @param {boolean} hasFontWeight Define if has font weight 600
+ * @param {Sizes} sizeValue Define size of button's label
+ */
 export const DashboardUnderlineButton: React.FC<Props> = ({
  id,
  action = () => { },
@@ -53,7 +67,6 @@ export const DashboardUnderlineButton: React.FC<Props> = ({
  icon,
  disable = false,
  loading = false,
- fitText = true,
  hasFontWeight = false,
  sizeValue,
  ...rest
@@ -64,7 +77,6 @@ export const DashboardUnderlineButton: React.FC<Props> = ({
    size={getWidth(size)}
    height={getHeight(height)}
    disable={disable}
-   fitText={fitText}
   >
    <button
     type={type}

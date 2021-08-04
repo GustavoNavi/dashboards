@@ -3,7 +3,13 @@ import AppTemplate from '../../Components/DashboardAppTemplate';
 import DashboardPage from '../../Components/DashboardPage';
 import { Sizes } from '../../ts/enum/componentSize';
 import { Bar, Line, Pie } from 'react-chartjs-2';
-import { StyWrapperBar, StyWrapperFilters, StySpinner, StyLabelInfo, StyBar } from './styles';
+import {
+  StyWrapperBar,
+  StyWrapperFilters,
+  StySpinner,
+  StyLabelInfo,
+  StyBar
+} from './styles';
 import DashboardFilters from './filters';
 import StatusModalInfo from './modal';
 import googleSheets from '../../services/googleSheets-controller';
@@ -28,7 +34,7 @@ export const Dashboard: React.FC<{}> = ({ }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const replaceRegex: RegExp = /\./g;
-
+  const [errorAttempts, setErrorAttempts] = useState<number>(0);
   const [contentTotalYear, setContentTotalYear] = useState<string[]>([]);
   const [contentTotalEcommerce, setContentTotalEcommerce] = useState<string[]>([]);
 
@@ -158,32 +164,10 @@ export const Dashboard: React.FC<{}> = ({ }) => {
     '2007', '2006', '2005', '2004', '2003', '2002', '2001', '2000', '1999'
   ];
 
-  function compareBundle(sheetsList: any, bundles: string[]) {
-    let array: string[] = [];
-    sheetsList?.forEach((oi: any, index: number) => {
-      if (oi === ' S' || oi === ' NA') {
-        array.push(`${bundles[index]} ${oi}`)
-      } else {
-        array.push(bundles[index]);
-      }
-    });
-    return array;
-  }
-
-  const [errorAttempts, setErrorAttempts] = useState<number>(0);
-
-  useEffect(() => {
-    if (selectedFilter) {
-      teste();
-    } else {
-      setContentData([]);
-      setContentObject([]);
-      setContentString([]);
-      setContentAfterSplit([]);
-    }
-  }, [selectedFilter, filterNameSelected]);
-
-  async function teste() {
+  /**
+  * @description Get GoogleSheetsAPI or show error message.
+  */
+  async function getGoogleSheetsAPI() {
     setError(false);
     try {
       setLoading(true);
@@ -196,7 +180,7 @@ export const Dashboard: React.FC<{}> = ({ }) => {
     } catch (err: any) {
       if (errorAttempts < 5) {
         setErrorAttempts(errorAttempts + 1);
-        teste();
+        getGoogleSheetsAPI();
       } else {
         setError(true);
       }
@@ -204,81 +188,30 @@ export const Dashboard: React.FC<{}> = ({ }) => {
     }
   }
 
-  useEffect(() => {
-    let arrayAux: any[] = [];
-    contentData?.forEach((values: any) => {
-      arrayAux?.push(values?.content);
-    });
-    setContentObject(arrayAux);
-  }, [contentData, selectedFilter]);
-
-  useEffect(() => {
-    let arrayAux: any[] = [];
-    if (contentObject) {
-      contentObject?.forEach((valueArray: any) => {
-        arrayAux?.push([valueArray?.$t?.split(', ')]);
-      })
-      setContentString(arrayAux);
-    }
-  }, [contentObject, selectedFilter]);
-
-  useEffect(() => {
-    let arrayAux: any[] = [];
-    let arrayTotal: any[] = [];
-    let arrayEcommerce: any[] = [];
-    let array2015EcommerceTotal: any[] = [];
-    contentString?.forEach((teste: any) => {
-      teste?.forEach((teste2: any) => {
-        if (selectedFilter) {
-          if (filterNameSelected === 'radio' || filterNameSelected === 'product') {
-            typeof selectedFilter === 'string' &&
-              arrayAux?.push(teste2[(Number(selectedFilter) + 2)]?.replace(/.+:/g, ""));
-            typeof selectedFilter === 'boolean' &&
-              arrayAux?.push(teste2[1]?.replace(/.+:/g, ""));
-          }
-        } else {
-          arrayAux?.push();
-          arrayTotal?.push();
-          arrayEcommerce?.push();
-          array2015EcommerceTotal?.push();
-        }
-      });
-    });
-    if (selectedFilter && filterNameSelected === 'year') {
-      if (Number(selectedFilter) === 0) {
-        contentString[0]?.forEach((aaaa: any) => {
-          aaaa.forEach((testeeeeee: any) => {
-            arrayTotal?.push(testeeeeee?.replace(/.+:/g, "")?.replace(replaceRegex, ""));
-          });
-        });
-        contentString[1]?.forEach((aaaa: any) => {
-          aaaa.forEach((testeeeeee: any) => {
-            arrayEcommerce?.push(testeeeeee?.replace(/.+:/g, "")?.replace(replaceRegex, ""));
-          });
-        });
-        contentString[2]?.forEach((aaaa: any) => {
-          aaaa.forEach((testeeeeee: any) => {
-            array2015EcommerceTotal?.push(testeeeeee?.replace(/.+:/g, "")?.replace(replaceRegex, ""));
-          });
-        });
+  /**
+   * @description Compare the bundles to put S or NA when necessary
+   * @param sheetsList Array of values
+   * @param bundles array of bundles
+   * @returns Correct list of bundle.
+   */
+  function compareBundle(sheetsList: any, bundles: string[]) {
+    let array: string[] = [];
+    sheetsList?.forEach((stringValue: any, index: number) => {
+      if (stringValue === ' S' || stringValue === ' NA') {
+        array.push(`${bundles[index]} ${stringValue}`)
       } else {
-        contentString[Number(selectedFilter) * 2 + 1]?.forEach((aaaa: any) => {
-          aaaa.forEach((testeeeeee: any) => {
-            arrayTotal?.push(testeeeeee?.replace(/.+:/g, "")?.replace(replaceRegex, ""));
-          });
-        });
-        contentString[Number(selectedFilter) * 2 + 2]?.forEach((aaaa: any) => {
-          aaaa.forEach((testeeeeee: any) => {
-            arrayEcommerce?.push(testeeeeee?.replace(/.+:/g, "")?.replace(replaceRegex, ""));
-          });
-        });
+        array.push(bundles[index]);
       }
-    }
-    setContentAfterSplit(arrayAux);
-    setContentTotalYear(arrayTotal);
-    setContentTotalEcommerce(arrayEcommerce);
-  }, [contentString, selectedFilter, filterNameSelected]);
+    });
+    return array;
+  }
 
+  /**
+   * @description Get SelectedFilter
+   * @param filter selected filter value
+   * @param filterName selected filter name
+   * @param filterBundle selected filter bundle
+   */
   function getSelectedFilter(filter: string | boolean, filterName: string, filterBundle: string) {
     setSelectedFilter(filter);
     setFilterNameSelected(filterName);
@@ -291,6 +224,12 @@ export const Dashboard: React.FC<{}> = ({ }) => {
     }
   }
 
+  /**
+   * @description Get Percentage of values 2015
+   * @param total array total of sales.
+   * @param ecommerce array total of E-Commerce sales.
+   * @returns Percentage of values 2015.
+   */
   function getPercentage(total: string, ecommerce: string) {
     let totalPercentage: number = Number(total);
     let ecommercePercentage: number = Number(ecommerce);
@@ -305,6 +244,104 @@ export const Dashboard: React.FC<{}> = ({ }) => {
       return [totalPercentage?.toFixed(2), ecommercePercentage?.toFixed(2)];
     }
   }
+
+  /**
+   * @description Call getGoogleSheetsAPI or clear all.
+   */
+  useEffect(() => {
+    if (selectedFilter) {
+      getGoogleSheetsAPI();
+    } else {
+      setContentData([]);
+      setContentObject([]);
+      setContentString([]);
+      setContentAfterSplit([]);
+    }
+  }, [selectedFilter, filterNameSelected]);
+
+  /**
+   * @description get for each content data
+   */
+  useEffect(() => {
+    let arrayAux: any[] = [];
+    contentData?.forEach((values: any) => {
+      arrayAux?.push(values?.content);
+    });
+    setContentObject(arrayAux);
+  }, [contentData, selectedFilter]);
+
+  /**
+ * @description get valueArray of contentObject
+ */
+  useEffect(() => {
+    let arrayAux: any[] = [];
+    if (contentObject) {
+      contentObject?.forEach((valueArray: any) => {
+        arrayAux?.push([valueArray?.$t?.split(', ')]);
+      })
+      setContentString(arrayAux);
+    }
+  }, [contentObject, selectedFilter]);
+
+  /**
+ * @description Make logic to apply into filter
+ */
+  useEffect(() => {
+    let arrayAux: any[] = [];
+    let arrayTotal: any[] = [];
+    let arrayEcommerce: any[] = [];
+    let array2015EcommerceTotal: any[] = [];
+    contentString?.forEach((content: any) => {
+      content?.forEach((contentValue: any) => {
+        if (selectedFilter) {
+          if (filterNameSelected === 'radio' || filterNameSelected === 'product') {
+            typeof selectedFilter === 'string' &&
+              arrayAux?.push(contentValue[(Number(selectedFilter) + 2)]?.replace(/.+:/g, ""));
+            typeof selectedFilter === 'boolean' &&
+              arrayAux?.push(contentValue[1]?.replace(/.+:/g, ""));
+          }
+        } else {
+          arrayAux?.push();
+          arrayTotal?.push();
+          arrayEcommerce?.push();
+          array2015EcommerceTotal?.push();
+        }
+      });
+    });
+    if (selectedFilter && filterNameSelected === 'year') {
+      if (Number(selectedFilter) === 0) {
+        contentString[0]?.forEach((stringValue: any) => {
+          stringValue.forEach((value: string) => {
+            arrayTotal?.push(value?.replace(/.+:/g, "")?.replace(replaceRegex, ""));
+          });
+        });
+        contentString[1]?.forEach((stringValue: any) => {
+          stringValue.forEach((value: string) => {
+            arrayEcommerce?.push(value?.replace(/.+:/g, "")?.replace(replaceRegex, ""));
+          });
+        });
+        contentString[2]?.forEach((stringValue: any) => {
+          stringValue.forEach((value: string) => {
+            array2015EcommerceTotal?.push(value?.replace(/.+:/g, "")?.replace(replaceRegex, ""));
+          });
+        });
+      } else {
+        contentString[Number(selectedFilter) * 2 + 1]?.forEach((stringValue: any) => {
+          stringValue.forEach((value: string) => {
+            arrayTotal?.push(value?.replace(/.+:/g, "")?.replace(replaceRegex, ""));
+          });
+        });
+        contentString[Number(selectedFilter) * 2 + 2]?.forEach((stringValue: any) => {
+          stringValue.forEach((value: string) => {
+            arrayEcommerce?.push(value?.replace(/.+:/g, "")?.replace(replaceRegex, ""));
+          });
+        });
+      }
+    }
+    setContentAfterSplit(arrayAux);
+    setContentTotalYear(arrayTotal);
+    setContentTotalEcommerce(arrayEcommerce);
+  }, [contentString, selectedFilter, filterNameSelected]);
 
   return (
     <>
@@ -400,7 +437,8 @@ export const Dashboard: React.FC<{}> = ({ }) => {
                   </StyWrapperBar>
                   <StyWrapperBar height="400px" width="45%">
                     {
-                      getPercentage(totalArray[16], totalArrayECommerce[16]) !== false ? (
+                      totalArray && totalArrayECommerce &&
+                        getPercentage(totalArray[16], totalArrayECommerce[16]) !== false ? (
                         <Pie
                           data={{
                             labels: filterNameSelected === 'product' ?

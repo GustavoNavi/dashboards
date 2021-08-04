@@ -69,6 +69,3 @@ export const StyRadio = styled.input.attrs({
   height: 0;
   width: 0; 
 `;
-
-export const StyErrorWrapper = styled.div`
-`;

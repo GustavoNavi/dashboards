@@ -11,13 +11,6 @@ export const StyPositionWrapper = styled.div`
   margin-top: 5px;
 `;
 
-export const StyErrorWrapper = styled.div`
-  width: max-content;
-  & > span {
-    display: flex;
-    width: max-content;
-  }
-`;
 export const StyLabel = styled.div`
 
   & > div {

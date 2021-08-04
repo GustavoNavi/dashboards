@@ -29,11 +29,7 @@ interface IProps {
  * @description Dashboard StatusModalInfo Component.
  * @param {string} id Component Id .
  * @param {boolean} isOpen If true the modal show up.
- * @param {number} status Selected status row.
- * @param {number} closeModal Function state to show modal.
- * @param {string} onInactiveStatus Function to inactive a status by id.
- * @param {string} onInactiveStatusSupplier Function to inactive a status supplier by id.
- * @param {any} updateOpenModal Open update modal.
+ * @param {Function} closeModal Function state to show modal.
  */
 export const StatusModalInfo: React.FC<IProps> = ({
  id,
@@ -66,7 +62,7 @@ export const StatusModalInfo: React.FC<IProps> = ({
    msg_note_estimates,
   ]
 
- const optionSigles: string[] =
+ const optionAcronyms: string[] =
   [
    'NA - ',
    'S - ',
@@ -83,6 +79,11 @@ export const StatusModalInfo: React.FC<IProps> = ({
    'http://www.census.gov/retail/arts/how_surveys_are_collected.html',
   ];
 
+ /**
+  * @description Get correct link to correct bundle.
+  * @param index index of bundles.
+  * @returns Correct link.
+  */
  function getCorrectLink(index: number) {
   let bundle: string = '';
 
@@ -95,25 +96,30 @@ export const StatusModalInfo: React.FC<IProps> = ({
   return bundle;
  }
 
+ /**
+  * @description Get correct correct bundle.
+  * @param index index of bundles.
+  * @returns Correct bundle.
+  */
  function getCorrectBundle(index: number) {
   let bundle: string = '';
 
   if (index === 0) {
-   bundle = optionSigles[0];
+   bundle = optionAcronyms[0];
   } else if (index === 1) {
-   bundle = optionSigles[1];
+   bundle = optionAcronyms[1];
   } else if (index === 2) {
-   bundle = optionSigles[2];
+   bundle = optionAcronyms[2];
   } else if (index === 3) {
-   bundle = optionSigles[3];
+   bundle = optionAcronyms[3];
   } else if (index === 4) {
-   bundle = optionSigles[4];
+   bundle = optionAcronyms[4];
   } else if (index === 5) {
-   bundle = optionSigles[5];
+   bundle = optionAcronyms[5];
   } else if (index === 6) {
-   bundle = optionSigles[6];
+   bundle = optionAcronyms[6];
   } else if (index === 7) {
-   bundle = optionSigles[6];
+   bundle = optionAcronyms[6];
   }
 
   return bundle;

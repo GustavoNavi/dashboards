@@ -15,22 +15,23 @@ import {
  StyContainer,
  StyWrapperRadio,
  StyFilters,
+ StyUnderlineButtonWrapper,
+ StySelectBoxWrapper,
+ StyButtonWrapper,
+ StyButtonWidth,
 } from './styles';
 
 export interface IProps {
  id: string;
- children?: React.ReactNode;
- idiomOptions?: any;
  onChange?: Function;
- currentIdiom?: string;
  onShowModal?: Function;
 }
 
 /**
  * @description DashboardFilters Component.
  * @param {string} id Component Identification.
- * @param {ReactElement} children React elements children.
- * @param {object} idiomOptions Select idiom options.
+ * @param {Function} onShowModal Action on show modal.
+ * @param {Function} onChange Action on change.
  */
 const DashboardFilters: React.FC<IProps> = ({
  id,
@@ -107,6 +108,10 @@ const DashboardFilters: React.FC<IProps> = ({
  const [resetYear, setResetYear] = useState<boolean>(false);
  const [filterBundle, serFilterBundle] = useState<string>('');
 
+ /**
+  * @description Change radio select info.
+  * @param option Selected option.
+  */
  function selectRadio(option: string | boolean) {
   if (typeof option === 'string') {
    setRadioCheck(true);
@@ -124,6 +129,10 @@ const DashboardFilters: React.FC<IProps> = ({
   setResetYear(true);
  }
 
+ /**
+  * @description Change select product info.
+  * @param option Selected option.
+  */
  function selectProduct(option: string) {
   setResetProduct(false);
   setRadioCheck(false);
@@ -133,6 +142,10 @@ const DashboardFilters: React.FC<IProps> = ({
   setFilterName('product');
  }
 
+ /**
+ * @description Change select year info.
+ * @param option Selected option.
+ */
  function selectYear(option: string) {
   setResetYear(false);
   setRadioCheck(false);
@@ -142,6 +155,9 @@ const DashboardFilters: React.FC<IProps> = ({
   setFilterName('year');
  }
 
+ /**
+  * @description Clear all filters.
+  */
  function clearFilters() {
   setResetYear(true);
   setRadioCheck(false);
@@ -150,6 +166,9 @@ const DashboardFilters: React.FC<IProps> = ({
   setFilterName('');
  }
 
+ /**
+  * @description Trigger onChange.
+  */
  useEffect(() => {
   onChange(filterTO, filterName, filterBundle);
  }, [filterTO, filterName, filterBundle, onChange]);
@@ -170,7 +189,7 @@ const DashboardFilters: React.FC<IProps> = ({
       color="rgb(255,255,255)"
      />
     </DashboardSpacingFormatter>
-    <div style={{ height: '80px', display: 'flex' }}>
+    <StySelectBoxWrapper>
      <DashboardSpacingFormatter
       marginDirection={SpacingDirection.RIGHT_LEFT}
       margin={DashboardSpacing.base25}
@@ -212,9 +231,9 @@ const DashboardFilters: React.FC<IProps> = ({
        labelColor="rgb(255,255,255, 0.8)"
       />
      </StyWrapperRadio>
-    </div>
-    <div style={{ display: 'flex', alignItems: 'center' }}>
-     <div style={{ width: '50%' }}>
+    </StySelectBoxWrapper>
+    <StyButtonWrapper>
+     <StyButtonWidth>
       <DashboardSpacingFormatter
        marginDirection={SpacingDirection.LEFT}
        margin={DashboardSpacing.base25}
@@ -230,8 +249,8 @@ const DashboardFilters: React.FC<IProps> = ({
         color="rgb(255,255,255)"
        />
       </DashboardSpacingFormatter>
-     </div>
-     <div style={{ display: 'flex', flexDirection: 'row', width: '50%', alignItems: 'center' }}>
+     </StyButtonWidth>
+     <StyUnderlineButtonWrapper>
       <DashboardUnderlineButton
        title={btn_clean_filter}
        id="underline-button-id"
@@ -247,8 +266,8 @@ const DashboardFilters: React.FC<IProps> = ({
         action={() => onShowModal(true)}
        />
       </DashboardSpacingFormatter>
-     </div>
-    </div>
+     </StyUnderlineButtonWrapper>
+    </StyButtonWrapper>
    </StyFilters>
   </StyContainer>
  );

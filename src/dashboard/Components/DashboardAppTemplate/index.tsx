@@ -1,5 +1,3 @@
-import { useBundle } from '../../hooks/useBundle';
-import { bundleRoot } from '../../i18n/root';
 import React, { useContext } from 'react';
 import { LanguageContext } from '../../store/language';
 import { StyShowContent } from './styles';
@@ -14,25 +12,18 @@ interface IProps {
  children?: React.ReactNode;
 }
 
+/**
+ * @description AppTemplate of all pages.
+ * @param {React.ReactNode} children Page inside AppTemplate. 
+ */
 export const AppTemplate: React.FC<IProps> = ({
  children,
 }) => {
- const {
-  lbl_portuguese,
-  lbl_spanish,
-  lbl_english,
- } = useBundle(bundleRoot);
 
  const { changeLanguage }: any = useContext(LanguageContext);
 
- const idiomOptions = {
-  PT: lbl_portuguese,
-  EN: lbl_english,
-  ES: lbl_spanish,
- };
-
  /**
-  * @description handle Sidebar idiom changes .
+  * @description Handle idiom changes .
   * @param {string} idiom.
   */
  function handleChangeIdiom(idiom: string) {
@@ -53,8 +44,6 @@ export const AppTemplate: React.FC<IProps> = ({
     <DashboardTemplate
      onChange={handleChangeIdiom}
      id="appTemplate"
-     idiomOptions={idiomOptions}
-     currentIdiom='PT'
     >
      {children}
     </DashboardTemplate>
