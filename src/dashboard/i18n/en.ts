@@ -17,10 +17,10 @@ const en = {
  lbl_toys_hobby_games: 'Toys, hobby goods, and games',
  lbl_other_merchandise2: 'Other merchandise2',
  lbl_nonmerchandise_receipts3: 'Nonmerchandise receipts3',
- lbl_product_type: 'Product Type compared 2015-1999',
+ lbl_product_type: 'Product Type compared 1999 - 2015',
  lbl_product_year: 'All products since year',
  lbl_all_years: 'All products every year',
- lbl_comparison_over_years: 'Comparison of all products in relation to sales',
+ lbl_comparison_over_years: 'Evolution of sales from 1999 to 2015',
  lbl_filters: 'Filters',
  lbl_select: 'Select',
  lbl_select_filter: 'Select a Filter To Get Started',
@@ -53,7 +53,8 @@ const en = {
  msg_note: 'Note:',
  msg_note_sales: 'Sales estimates are shown in millions of dollars, consequently industry group estimates may not be additive.',
  msg_note_estimates: 'Estimates are not adjusted for price changes. Additional information on confidentiality protection, sampling error, nonsampling error, sample design, and definitions can be found on the Internet at',
- msg_error: 'Error loading information. Refresh the page, re-filter or contact your system administrator.'
+ msg_error: 'Error loading information. Refresh the page, re-filter or contact your system administrator.',
+ mgm_estimated: '[Estimates are shown in millions of dollars and are based on data from the Annual Retail Trade Survey.  Estimates have been adjusted using final results of the 2012 Economic Census.]'
 }
 
 export default en;

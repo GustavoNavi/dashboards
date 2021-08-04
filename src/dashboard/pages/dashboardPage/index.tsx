@@ -8,7 +8,8 @@ import {
   StyWrapperFilters,
   StySpinner,
   StyLabelInfo,
-  StyBar
+  StyBar,
+  StyEstimatedWrapper
 } from './styles';
 import DashboardFilters from './filters';
 import StatusModalInfo from './modal';
@@ -65,7 +66,8 @@ export const Dashboard: React.FC<{}> = ({ }) => {
     lbl_not_show_pie,
     lbl_product_sold_from_ecommerce,
     lbl_product_sold_from,
-    msg_error
+    msg_error,
+    mgm_estimated
   } = useBundle(bundleRoot);
 
   const bundlesProducts: string[] = [
@@ -360,6 +362,13 @@ export const Dashboard: React.FC<{}> = ({ }) => {
           />
         </StyWrapperFilters>
         <DashboardPage hasMargin={false} hasShadow={false} width={Sizes.xl}>
+          <StyEstimatedWrapper>
+            <DashboardText
+              size={Sizes.xs}
+              fontWeight="600"
+              value={mgm_estimated}
+            />
+          </StyEstimatedWrapper>
           {!selectedFilter &&
             <StyLabelInfo>
               <DashboardText

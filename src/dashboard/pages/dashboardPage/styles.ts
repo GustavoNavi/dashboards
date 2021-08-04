@@ -55,3 +55,9 @@ export const StyBar = styled.div<IStyBar>`
 `
   }
   `
+export const StyEstimatedWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 25px;
+`;

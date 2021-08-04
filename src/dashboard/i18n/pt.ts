@@ -17,10 +17,10 @@ const pt = {
  lbl_toys_hobby_games: 'Brinquedos, artigos de passatempo e jogos',
  lbl_other_merchandise2: 'Outras mercadorias2',
  lbl_nonmerchandise_receipts3: 'Receitas não mercantis3',
- lbl_product_type: 'Tipo de produto em comparação 2015-1999',
+ lbl_product_type: 'Tipo de produto em comparação 1999 - 2015',
  lbl_product_year: 'Todos os produtos desde ano',
  lbl_all_years: 'Todos os produtos de todos os anos',
- lbl_comparison_over_years: 'Comparativo de todos os produtos em relação a vendas',
+ lbl_comparison_over_years: 'Evolução das vendas de 1999 a 2015',
  lbl_filters: 'Filtros',
  lbl_select: 'Selecione',
  lbl_select_filter: 'Selecione um Filtro Para Começar',
@@ -53,7 +53,8 @@ const pt = {
  msg_note: 'Nota:',
  msg_note_sales: 'As estimativas de vendas são mostradas em milhões de dólares, conseqüentemente, as estimativas do grupo da indústria podem não ser aditivas.',
  msg_note_estimates: 'As estimativas não são ajustadas para mudanças de preço. Informações adicionais sobre proteção de confidencialidade, erro de amostragem, erro de não amostragem, desenho de amostra e definições podem ser encontradas na Internet em',
- msg_error: 'Erro ao carregar as informações. Atualize a página, faça o filtro novamente ou entre em contato com o adminitrador do sistema.'
+ msg_error: 'Erro ao carregar as informações. Atualize a página, faça o filtro novamente ou entre em contato com o adminitrador do sistema.',
+ mgm_estimated: '[As estimativas são apresentadas em milhões de dólares e baseiam-se nos dados da Pesquisa Anual do Comércio a Varejo. As estimativas foram ajustadas com base nos resultados finais do Censo Econômico de 2012.]'
 }
 
 export default pt;
