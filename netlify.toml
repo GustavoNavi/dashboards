@@ -5,6 +5,6 @@ publish = "./build/"
 
 [[redirects]]
   from = "/*"
-  to = "https://gallant-allen-06ea90.netlify.app/KaBuM/dashboard"
+  to = "https://kabumdashboards.netlify.app/KaBuM/dashboard"
   status = 200
   force = true
