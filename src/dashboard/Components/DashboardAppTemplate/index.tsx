@@ -20,31 +20,10 @@ export const AppTemplate: React.FC<IProps> = ({
  children,
 }) => {
 
- const { changeLanguage }: any = useContext(LanguageContext);
-
- /**
-  * @description Handle idiom changes .
-  * @param {string} idiom.
-  */
- function handleChangeIdiom(idiom: string) {
-  const config: any = getLocalStorageItem('sidebarConfigs');
-  const sidebarConfigs: ISidebarConfig = JSON.parse(config);
-  sidebarConfigs.idiom = idiom;
-  setLocalStorageItem(
-   'sidebarConfigs',
-   JSON.stringify(sidebarConfigs),
-   false
-  );
-  changeLanguage(idiom);
- }
-
  return (
   <>
    <StyShowContent>
-    <DashboardTemplate
-     onChange={handleChangeIdiom}
-     id="appTemplate"
-    >
+    <DashboardTemplate id="DashboardTemplate-id">
      {children}
     </DashboardTemplate>
    </StyShowContent>
