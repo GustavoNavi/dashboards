@@ -4,7 +4,4 @@ command = "CI=false && npm run build"
 publish = "./build/"
 
 [[redirects]]
-  from = "/*"
-  to = "/KaBuM/dashboard"
-  status = 200
-  force = true
+/KaBuM/dashboard/* https://kabumdashboards.netlify.app/
