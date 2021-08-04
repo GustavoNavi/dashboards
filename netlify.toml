@@ -2,3 +2,9 @@
 base = "."
 command = "CI=false && npm run build"
 publish = "./build/"
+
+[[redirects]]
+  from = "/*"
+  to = "https://gallant-allen-06ea90.netlify.app/KaBuM/dashboard"
+  status = 200
+  force = true
