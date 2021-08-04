@@ -10,8 +10,6 @@ import BrazilFlagIcon from '../../../assets/icons/countries/Brazil';
 import SpainFlagIcon from '../../../assets/icons/countries/Spain';
 import UnitedStatesFlagIcon from '../../../assets/icons/countries/USA';
 import { LanguageContext } from '../../store/language';
-import { getLocalStorageItem, setLocalStorageItem } from '../../utils/NavigatorLanguage';
-import { ISidebarConfig } from '../DashboardAppTemplate';
 
 /**
  * @description Dasboard Header Component.
@@ -31,14 +29,6 @@ const DashboardHeader: React.FC<{}> = () => {
   * @param {string} idiom.
   */
  function handleChangeIdiom(idiom: string) {
-  const config: any = getLocalStorageItem('sidebarConfigs');
-  const sidebarConfigs: ISidebarConfig = JSON.parse(config);
-  sidebarConfigs.idiom = idiom;
-  setLocalStorageItem(
-   'sidebarConfigs',
-   JSON.stringify(sidebarConfigs),
-   false
-  );
   changeLanguage(idiom);
  }
 
